@@ -21,14 +21,14 @@
   tasks:
     - name: Pull backend image
       docker_image:
-        name: backend
+        name: website-backend
         source: local
         tag: latest
 
     - name: Run backend container
       docker_container:
         name: node-backend
-        image: backend:latest
+        image: website-backend:latest
         ports:
           - "5000:5000"
         environment:
