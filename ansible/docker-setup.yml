@@ -17,27 +17,6 @@
         state: present
         update_cache: yes
 
-    # - name: add Docker GPG key
-    #   apt_key:
-    #     url: https://download.docker.com/linux/ubuntu/gpg
-    #     state: present
-    #     validate_certs: no
-    #   register: gpg_key
-
-    # - name: Change permissions for Docker keyring
-    #   command: chmod a+r /usr/share/keyrings/docker-archive-keyring.gpg
-    #   when: gpg_key.changed  # Only execute if the GPG key was added
-
-    # - name: add Docker repository
-    #   apt_repository:
-    #     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
-    #     state: present
-
-    # - name: update apt and install Docker CE
-    #   apt:
-    #     name: docker-ce
-    #     state: latest
-    #     update_cache: yes
     - name: Install Docker using convenience script
       shell: |
         curl -fsSL https://get.docker.com -o get-docker.sh
