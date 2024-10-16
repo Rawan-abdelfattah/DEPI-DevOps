@@ -36,29 +36,44 @@ pipeline {
             }
         }
 
+        stage('Install Terraform') {
+            steps {
+                sh '''
+                    if [ ! -f /usr/local/bin/terraform ]; then
+                        wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+                        unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+                        sudo mv terraform /usr/local/bin/
+                    fi
+                '''
+            }
+        }
+
         stage('Terraform Init') {
             steps {
-                dir(TERRAFORM_DIR) {
-                    // Initialize Terraform
-                    sh 'terraform init'
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+                    dir(TERRAFORM_DIR) {
+                        sh 'terraform init'
+                    }
                 }
             }
         }
 
         stage('Terraform Plan') {
             steps {
-                dir(TERRAFORM_DIR) {
-                    // Plan Terraform changes
-                    sh 'terraform plan -out=tfplan'
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+                    dir(TERRAFORM_DIR) {
+                        sh 'terraform plan -out=tfplan'
+                    }
                 }
             }
         }
 
         stage('Terraform Apply') {
             steps {
-                dir(TERRAFORM_DIR) {
-                    // Apply the planned Terraform changes
-                    sh 'terraform apply -input=false tfplan'
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+                    dir(TERRAFORM_DIR) {
+                        sh 'terraform apply -input=false tfplan'
+                    }
                 }
             }
         }
