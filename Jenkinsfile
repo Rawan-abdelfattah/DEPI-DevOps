@@ -5,6 +5,7 @@ pipeline {
         DOCKER_CREDENTIALS_ID = 'dockerhub' // Your Docker Hub credentials ID
         DOCKER_IMAGE_NAME = 'web_app' // Name for the Docker image
         ANSIBLE_PLAYBOOK = 'deploy.yml' // Ansible playbook (not used in the build stage)
+        TERRAFORM_DIR = 'terraform/'  // Directory containing your Terraform configuration
     }
 
     stages {
@@ -22,6 +23,45 @@ pipeline {
 
             }
         }
+
+        stage('key generation'){
+            steps{
+                sh '''
+                cd terraform
+                ssh-keygen -f mykey
+                ssh-add mykey
+                cd ..
+                '''
+            }
+        }
+
+        stage('Terraform Init') {
+            steps {
+                dir(TERRAFORM_DIR) {
+                    // Initialize Terraform
+                    sh 'terraform init'
+                }
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                dir(TERRAFORM_DIR) {
+                    // Plan Terraform changes
+                    sh 'terraform plan -out=tfplan'
+                }
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                dir(TERRAFORM_DIR) {
+                    // Apply the planned Terraform changes
+                    sh 'terraform apply -input=false tfplan'
+                }
+            }
+        }
+
 
         stage('Build Docker Image') {
             steps {
