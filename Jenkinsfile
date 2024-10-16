@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_CREDENTIALS_ID = 'janaessam' // Your Docker Hub credentials ID
+        DOCKER_CREDENTIALS_ID = 'dockerhub' // Your Docker Hub credentials ID
         DOCKER_IMAGE_NAME = 'web_app' // Name for the Docker image
         ANSIBLE_PLAYBOOK = 'deploy.yml' // Ansible playbook (not used in the build stage)
     }
