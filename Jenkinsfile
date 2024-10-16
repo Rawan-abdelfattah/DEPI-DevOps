@@ -43,9 +43,13 @@ pipeline {
                     def terraformVersion = '1.5.3' // Change this to the desired version
 
                     sh """
-                        # Remove old terraform file or directory if it exists
-                        if [ -e /usr/local/bin/terraform ]; then
+                        # Check if terraform exists, and whether it's a directory or file
+                        if [ -d /usr/local/bin/terraform ]; then
+                            echo "Removing existing terraform directory"
                             sudo rm -rf /usr/local/bin/terraform
+                        elif [ -f /usr/local/bin/terraform ]; then
+                            echo "Removing existing terraform file"
+                            sudo rm -f /usr/local/bin/terraform
                         fi
 
                         # Download and unzip the Terraform binary
@@ -53,7 +57,7 @@ pipeline {
                         unzip -o terraform_${terraformVersion}_linux_amd64.zip
 
                         # Move Terraform binary to /usr/local/bin/
-                        sudo mv terraform /usr/local/bin/
+                        sudo mv terraform /usr/local/bin/                
                     """
                 }
             }
