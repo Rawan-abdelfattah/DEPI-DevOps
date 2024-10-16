@@ -14,8 +14,6 @@ pipeline {
             }
         }
 
-        stage('local docker setup')
-
         stage('Checkout') {
             steps {
                 // Check out the code from the specified Git repository
