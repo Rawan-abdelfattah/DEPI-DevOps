@@ -36,34 +36,6 @@ pipeline {
             }
         }
 
-        stage('Install Terraform') {
-            steps {
-                script {
-                    // Make sure the Terraform version is set
-                    def terraformVersion = '1.5.3' // Change this to the desired version
-
-                    sh """
-                        # Remove existing Terraform if it's a directory or file
-                        if [ -d /usr/local/bin/terraform ]; then
-                            echo "Removing existing terraform directory"
-                            sudo rm -rf /usr/local/bin/terraform
-                        elif [ -f /usr/local/bin/terraform ]; then
-                            echo "Removing existing terraform file"
-                            sudo rm -f /usr/local/bin/terraform
-                        fi
-
-                        # Download the Terraform binary
-                        wget https://releases.hashicorp.com/terraform/${terraformVersion}/terraform_${terraformVersion}_linux_amd64.zip
-
-                        # Unzip the binary
-                        unzip -o terraform_${terraformVersion}_linux_amd64.zip
-
-                        # Move the binary to /usr/local/bin
-                        sudo mv terraform /usr/local/bin/                
-                    """
-                }
-            }
-        }
 
         stage('Terraform Init') {
             steps {
