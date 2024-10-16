@@ -3,16 +3,16 @@
         "hostvars": {
             "backend-server": {
                 "ami_launch_index": 0,
-                "ansible_host": "10.0.1.40",
+                "ansible_host": "10.0.1.73",
                 "architecture": "x86_64",
                 "block_device_mappings": [
                     {
                         "device_name": "/dev/sda1",
                         "ebs": {
-                            "attach_time": "2024-10-16T14:33:55+00:00",
+                            "attach_time": "2024-10-16T21:28:07+00:00",
                             "delete_on_termination": true,
                             "status": "attached",
-                            "volume_id": "vol-0642ca0b0c2b6ca5d"
+                            "volume_id": "vol-0662ec5c68a382b38"
                         }
                     }
                 ],
@@ -20,7 +20,7 @@
                 "capacity_reservation_specification": {
                     "capacity_reservation_preference": "open"
                 },
-                "client_token": "terraform-20241016143353529600000005",
+                "client_token": "terraform-20241016212806315900000005",
                 "cpu_options": {
                     "core_count": 1,
                     "threads_per_core": 2
@@ -36,10 +36,10 @@
                 },
                 "hypervisor": "xen",
                 "image_id": "ami-04cdc91e49cb06165",
-                "instance_id": "i-0c2ac33a87b2fcfd2",
+                "instance_id": "i-07840f01a03485924",
                 "instance_type": "t3.micro",
                 "key_name": "mykeypair",
-                "launch_time": "2024-10-16T14:33:54+00:00",
+                "launch_time": "2024-10-16T21:28:07+00:00",
                 "maintenance_options": {
                     "auto_recovery": "default"
                 },
@@ -57,8 +57,8 @@
                 "network_interfaces": [
                     {
                         "attachment": {
-                            "attach_time": "2024-10-16T14:33:54+00:00",
-                            "attachment_id": "eni-attach-076e26a69a6255e18",
+                            "attach_time": "2024-10-16T21:28:07+00:00",
+                            "attachment_id": "eni-attach-03902213327be5e21",
                             "delete_on_termination": true,
                             "device_index": 0,
                             "network_card_index": 0,
@@ -67,32 +67,32 @@
                         "description": "",
                         "groups": [
                             {
-                                "group_id": "sg-09d143d4376554aca",
-                                "group_name": "base-sg"
+                                "group_id": "sg-0358435faf8d679b0",
+                                "group_name": "backend-sg"
                             },
                             {
-                                "group_id": "sg-03e7cb0fe43ac5e1c",
-                                "group_name": "backend-sg"
+                                "group_id": "sg-03d88777b21a28477",
+                                "group_name": "base-sg"
                             }
                         ],
                         "interface_type": "interface",
                         "ipv6_addresses": [],
-                        "mac_address": "06:5a:74:58:07:a5",
-                        "network_interface_id": "eni-05f014d1f74aa36c5",
+                        "mac_address": "06:ca:66:a3:96:49",
+                        "network_interface_id": "eni-0b6d34e7a5e19ff4f",
                         "owner_id": "481665091509",
-                        "private_dns_name": "ip-10-0-1-40.eu-north-1.compute.internal",
-                        "private_ip_address": "10.0.1.40",
+                        "private_dns_name": "ip-10-0-1-73.eu-north-1.compute.internal",
+                        "private_ip_address": "10.0.1.73",
                         "private_ip_addresses": [
                             {
                                 "primary": true,
-                                "private_dns_name": "ip-10-0-1-40.eu-north-1.compute.internal",
-                                "private_ip_address": "10.0.1.40"
+                                "private_dns_name": "ip-10-0-1-73.eu-north-1.compute.internal",
+                                "private_ip_address": "10.0.1.73"
                             }
                         ],
                         "source_dest_check": true,
                         "status": "in-use",
-                        "subnet_id": "subnet-01b1bdbb260a6a01d",
-                        "vpc_id": "vpc-020bafeec15f30285"
+                        "subnet_id": "subnet-0a1333da66915b475",
+                        "vpc_id": "vpc-0c3b5181f7dfebb6b"
                     }
                 ],
                 "owner_id": "481665091509",
@@ -103,27 +103,27 @@
                     "tenancy": "default"
                 },
                 "platform_details": "Linux/UNIX",
-                "private_dns_name": "ip-10-0-1-40.eu-north-1.compute.internal",
+                "private_dns_name": "ip-10-0-1-73.eu-north-1.compute.internal",
                 "private_dns_name_options": {
                     "enable_resource_name_dns_a_record": false,
                     "enable_resource_name_dns_aaaa_record": false,
                     "hostname_type": "ip-name"
                 },
-                "private_ip_address": "10.0.1.40",
+                "private_ip_address": "10.0.1.73",
                 "product_codes": [],
                 "public_dns_name": "",
                 "requester_id": "",
-                "reservation_id": "r-071703d0cf5ec4eed",
+                "reservation_id": "r-0b23eacc42a3ba52d",
                 "root_device_name": "/dev/sda1",
                 "root_device_type": "ebs",
                 "security_groups": [
                     {
-                        "group_id": "sg-09d143d4376554aca",
-                        "group_name": "base-sg"
+                        "group_id": "sg-0358435faf8d679b0",
+                        "group_name": "backend-sg"
                     },
                     {
-                        "group_id": "sg-03e7cb0fe43ac5e1c",
-                        "group_name": "backend-sg"
+                        "group_id": "sg-03d88777b21a28477",
+                        "group_name": "base-sg"
                     }
                 ],
                 "source_dest_check": true,
@@ -132,29 +132,29 @@
                     "name": "running"
                 },
                 "state_transition_reason": "",
-                "subnet_id": "subnet-01b1bdbb260a6a01d",
+                "subnet_id": "subnet-0a1333da66915b475",
                 "tags": {
                     "Name": "backend-server",
                     "private_name": "backend-server",
                     "public_name": "backend-server"
                 },
                 "usage_operation": "RunInstances",
-                "usage_operation_update_time": "2024-10-16T14:33:54+00:00",
+                "usage_operation_update_time": "2024-10-16T21:28:07+00:00",
                 "virtualization_type": "hvm",
-                "vpc_id": "vpc-020bafeec15f30285"
+                "vpc_id": "vpc-0c3b5181f7dfebb6b"
             },
             "db-server": {
                 "ami_launch_index": 0,
-                "ansible_host": "10.0.1.247",
+                "ansible_host": "10.0.1.183",
                 "architecture": "x86_64",
                 "block_device_mappings": [
                     {
                         "device_name": "/dev/sda1",
                         "ebs": {
-                            "attach_time": "2024-10-16T14:33:41+00:00",
+                            "attach_time": "2024-10-16T21:27:54+00:00",
                             "delete_on_termination": true,
                             "status": "attached",
-                            "volume_id": "vol-07a13bf793c0fd21b"
+                            "volume_id": "vol-04408b0a0db807c0b"
                         }
                     }
                 ],
@@ -162,7 +162,7 @@
                 "capacity_reservation_specification": {
                     "capacity_reservation_preference": "open"
                 },
-                "client_token": "terraform-20241016143339471500000004",
+                "client_token": "terraform-20241016212752638200000004",
                 "cpu_options": {
                     "core_count": 1,
                     "threads_per_core": 2
@@ -178,10 +178,10 @@
                 },
                 "hypervisor": "xen",
                 "image_id": "ami-04cdc91e49cb06165",
-                "instance_id": "i-0eec03c1380940f8c",
+                "instance_id": "i-0721fc94e05389459",
                 "instance_type": "t3.micro",
                 "key_name": "mykeypair",
-                "launch_time": "2024-10-16T14:33:40+00:00",
+                "launch_time": "2024-10-16T21:27:53+00:00",
                 "maintenance_options": {
                     "auto_recovery": "default"
                 },
@@ -199,8 +199,8 @@
                 "network_interfaces": [
                     {
                         "attachment": {
-                            "attach_time": "2024-10-16T14:33:40+00:00",
-                            "attachment_id": "eni-attach-0e5fabfb565255402",
+                            "attach_time": "2024-10-16T21:27:53+00:00",
+                            "attachment_id": "eni-attach-019b62ac9571c851a",
                             "delete_on_termination": true,
                             "device_index": 0,
                             "network_card_index": 0,
@@ -209,32 +209,32 @@
                         "description": "",
                         "groups": [
                             {
-                                "group_id": "sg-09d143d4376554aca",
-                                "group_name": "base-sg"
+                                "group_id": "sg-0358435faf8d679b0",
+                                "group_name": "backend-sg"
                             },
                             {
-                                "group_id": "sg-03e7cb0fe43ac5e1c",
-                                "group_name": "backend-sg"
+                                "group_id": "sg-03d88777b21a28477",
+                                "group_name": "base-sg"
                             }
                         ],
                         "interface_type": "interface",
                         "ipv6_addresses": [],
-                        "mac_address": "06:ce:51:e1:93:cd",
-                        "network_interface_id": "eni-0e403a9fe48345b69",
+                        "mac_address": "06:a1:08:13:fc:c1",
+                        "network_interface_id": "eni-075db2aeae4574cee",
                         "owner_id": "481665091509",
-                        "private_dns_name": "ip-10-0-1-247.eu-north-1.compute.internal",
-                        "private_ip_address": "10.0.1.247",
+                        "private_dns_name": "ip-10-0-1-183.eu-north-1.compute.internal",
+                        "private_ip_address": "10.0.1.183",
                         "private_ip_addresses": [
                             {
                                 "primary": true,
-                                "private_dns_name": "ip-10-0-1-247.eu-north-1.compute.internal",
-                                "private_ip_address": "10.0.1.247"
+                                "private_dns_name": "ip-10-0-1-183.eu-north-1.compute.internal",
+                                "private_ip_address": "10.0.1.183"
                             }
                         ],
                         "source_dest_check": true,
                         "status": "in-use",
-                        "subnet_id": "subnet-01b1bdbb260a6a01d",
-                        "vpc_id": "vpc-020bafeec15f30285"
+                        "subnet_id": "subnet-0a1333da66915b475",
+                        "vpc_id": "vpc-0c3b5181f7dfebb6b"
                     }
                 ],
                 "owner_id": "481665091509",
@@ -245,27 +245,27 @@
                     "tenancy": "default"
                 },
                 "platform_details": "Linux/UNIX",
-                "private_dns_name": "ip-10-0-1-247.eu-north-1.compute.internal",
+                "private_dns_name": "ip-10-0-1-183.eu-north-1.compute.internal",
                 "private_dns_name_options": {
                     "enable_resource_name_dns_a_record": false,
                     "enable_resource_name_dns_aaaa_record": false,
                     "hostname_type": "ip-name"
                 },
-                "private_ip_address": "10.0.1.247",
+                "private_ip_address": "10.0.1.183",
                 "product_codes": [],
                 "public_dns_name": "",
                 "requester_id": "",
-                "reservation_id": "r-0de048ee1253ce349",
+                "reservation_id": "r-04a538c402bc49214",
                 "root_device_name": "/dev/sda1",
                 "root_device_type": "ebs",
                 "security_groups": [
                     {
-                        "group_id": "sg-09d143d4376554aca",
-                        "group_name": "base-sg"
+                        "group_id": "sg-0358435faf8d679b0",
+                        "group_name": "backend-sg"
                     },
                     {
-                        "group_id": "sg-03e7cb0fe43ac5e1c",
-                        "group_name": "backend-sg"
+                        "group_id": "sg-03d88777b21a28477",
+                        "group_name": "base-sg"
                     }
                 ],
                 "source_dest_check": true,
@@ -274,29 +274,29 @@
                     "name": "running"
                 },
                 "state_transition_reason": "",
-                "subnet_id": "subnet-01b1bdbb260a6a01d",
+                "subnet_id": "subnet-0a1333da66915b475",
                 "tags": {
                     "Name": "db-server",
                     "private_name": "db-server",
                     "public_name": "db-server"
                 },
                 "usage_operation": "RunInstances",
-                "usage_operation_update_time": "2024-10-16T14:33:40+00:00",
+                "usage_operation_update_time": "2024-10-16T21:27:53+00:00",
                 "virtualization_type": "hvm",
-                "vpc_id": "vpc-020bafeec15f30285"
+                "vpc_id": "vpc-0c3b5181f7dfebb6b"
             },
             "frontend-server": {
                 "ami_launch_index": 0,
-                "ansible_host": "13.60.10.11",
+                "ansible_host": "13.51.156.102",
                 "architecture": "x86_64",
                 "block_device_mappings": [
                     {
                         "device_name": "/dev/sda1",
                         "ebs": {
-                            "attach_time": "2024-10-16T14:34:09+00:00",
+                            "attach_time": "2024-10-16T21:28:21+00:00",
                             "delete_on_termination": true,
                             "status": "attached",
-                            "volume_id": "vol-02434f40936dd7889"
+                            "volume_id": "vol-0da6da1632e502225"
                         }
                     }
                 ],
@@ -304,7 +304,7 @@
                 "capacity_reservation_specification": {
                     "capacity_reservation_preference": "open"
                 },
-                "client_token": "terraform-20241016143407420100000006",
+                "client_token": "terraform-20241016212820248600000006",
                 "cpu_options": {
                     "core_count": 1,
                     "threads_per_core": 2
@@ -320,10 +320,10 @@
                 },
                 "hypervisor": "xen",
                 "image_id": "ami-04cdc91e49cb06165",
-                "instance_id": "i-04ed868bac9c69fc6",
+                "instance_id": "i-0c7076d9076cc7096",
                 "instance_type": "t3.micro",
                 "key_name": "mykeypair",
-                "launch_time": "2024-10-16T14:34:08+00:00",
+                "launch_time": "2024-10-16T21:28:21+00:00",
                 "maintenance_options": {
                     "auto_recovery": "default"
                 },
@@ -342,12 +342,12 @@
                     {
                         "association": {
                             "ip_owner_id": "amazon",
-                            "public_dns_name": "ec2-13-60-10-11.eu-north-1.compute.amazonaws.com",
-                            "public_ip": "13.60.10.11"
+                            "public_dns_name": "ec2-13-51-156-102.eu-north-1.compute.amazonaws.com",
+                            "public_ip": "13.51.156.102"
                         },
                         "attachment": {
-                            "attach_time": "2024-10-16T14:34:08+00:00",
-                            "attachment_id": "eni-attach-021c1de00aa749a75",
+                            "attach_time": "2024-10-16T21:28:21+00:00",
+                            "attachment_id": "eni-attach-087dbcea6599ed0e1",
                             "delete_on_termination": true,
                             "device_index": 0,
                             "network_card_index": 0,
@@ -356,41 +356,41 @@
                         "description": "",
                         "groups": [
                             {
-                                "group_id": "sg-09d143d4376554aca",
-                                "group_name": "base-sg"
-                            },
-                            {
-                                "group_id": "sg-005b578fdecd8f98b",
+                                "group_id": "sg-04e82d8a9add6f070",
                                 "group_name": "bastion-allow-ssh"
                             },
                             {
-                                "group_id": "sg-0f8fca51fe5e9f5f3",
+                                "group_id": "sg-04ee8bd3052f48ea2",
                                 "group_name": "frontend-sg"
+                            },
+                            {
+                                "group_id": "sg-03d88777b21a28477",
+                                "group_name": "base-sg"
                             }
                         ],
                         "interface_type": "interface",
                         "ipv6_addresses": [],
-                        "mac_address": "06:01:bc:b5:45:a7",
-                        "network_interface_id": "eni-00a99bd075ab8354d",
+                        "mac_address": "06:ff:a9:a2:21:9d",
+                        "network_interface_id": "eni-0fbb15dacc110caff",
                         "owner_id": "481665091509",
-                        "private_dns_name": "ip-10-0-101-246.eu-north-1.compute.internal",
-                        "private_ip_address": "10.0.101.246",
+                        "private_dns_name": "ip-10-0-101-4.eu-north-1.compute.internal",
+                        "private_ip_address": "10.0.101.4",
                         "private_ip_addresses": [
                             {
                                 "association": {
                                     "ip_owner_id": "amazon",
-                                    "public_dns_name": "ec2-13-60-10-11.eu-north-1.compute.amazonaws.com",
-                                    "public_ip": "13.60.10.11"
+                                    "public_dns_name": "ec2-13-51-156-102.eu-north-1.compute.amazonaws.com",
+                                    "public_ip": "13.51.156.102"
                                 },
                                 "primary": true,
-                                "private_dns_name": "ip-10-0-101-246.eu-north-1.compute.internal",
-                                "private_ip_address": "10.0.101.246"
+                                "private_dns_name": "ip-10-0-101-4.eu-north-1.compute.internal",
+                                "private_ip_address": "10.0.101.4"
                             }
                         ],
                         "source_dest_check": true,
                         "status": "in-use",
-                        "subnet_id": "subnet-02b7c7664abe6b9c7",
-                        "vpc_id": "vpc-020bafeec15f30285"
+                        "subnet_id": "subnet-0a200db0abdd27c91",
+                        "vpc_id": "vpc-0c3b5181f7dfebb6b"
                     }
                 ],
                 "owner_id": "481665091509",
@@ -401,32 +401,32 @@
                     "tenancy": "default"
                 },
                 "platform_details": "Linux/UNIX",
-                "private_dns_name": "ip-10-0-101-246.eu-north-1.compute.internal",
+                "private_dns_name": "ip-10-0-101-4.eu-north-1.compute.internal",
                 "private_dns_name_options": {
                     "enable_resource_name_dns_a_record": false,
                     "enable_resource_name_dns_aaaa_record": false,
                     "hostname_type": "ip-name"
                 },
-                "private_ip_address": "10.0.101.246",
+                "private_ip_address": "10.0.101.4",
                 "product_codes": [],
-                "public_dns_name": "ec2-13-60-10-11.eu-north-1.compute.amazonaws.com",
-                "public_ip_address": "13.60.10.11",
+                "public_dns_name": "ec2-13-51-156-102.eu-north-1.compute.amazonaws.com",
+                "public_ip_address": "13.51.156.102",
                 "requester_id": "",
-                "reservation_id": "r-05128a32aa7a7e3e8",
+                "reservation_id": "r-0a9e81c8b6c77bbf3",
                 "root_device_name": "/dev/sda1",
                 "root_device_type": "ebs",
                 "security_groups": [
                     {
-                        "group_id": "sg-09d143d4376554aca",
-                        "group_name": "base-sg"
-                    },
-                    {
-                        "group_id": "sg-005b578fdecd8f98b",
+                        "group_id": "sg-04e82d8a9add6f070",
                         "group_name": "bastion-allow-ssh"
                     },
                     {
-                        "group_id": "sg-0f8fca51fe5e9f5f3",
+                        "group_id": "sg-04ee8bd3052f48ea2",
                         "group_name": "frontend-sg"
+                    },
+                    {
+                        "group_id": "sg-03d88777b21a28477",
+                        "group_name": "base-sg"
                     }
                 ],
                 "source_dest_check": true,
@@ -435,16 +435,16 @@
                     "name": "running"
                 },
                 "state_transition_reason": "",
-                "subnet_id": "subnet-02b7c7664abe6b9c7",
+                "subnet_id": "subnet-0a200db0abdd27c91",
                 "tags": {
                     "Name": "frontend-server",
                     "private_name": "frontend-server",
                     "public_name": "frontend-server"
                 },
                 "usage_operation": "RunInstances",
-                "usage_operation_update_time": "2024-10-16T14:34:08+00:00",
+                "usage_operation_update_time": "2024-10-16T21:28:21+00:00",
                 "virtualization_type": "hvm",
-                "vpc_id": "vpc-020bafeec15f30285"
+                "vpc_id": "vpc-0c3b5181f7dfebb6b"
             }
         }
     },

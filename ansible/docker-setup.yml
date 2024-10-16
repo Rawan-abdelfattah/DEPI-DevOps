@@ -14,6 +14,10 @@
           - ca-certificates
           - curl
           - software-properties-common
+          - python3
+          - python3-venv
+          - python3-pip
+          - python3-docker
         state: present
         update_cache: yes
 
@@ -23,14 +27,25 @@
         sh get-docker.sh
       args:
         executable: /bin/bash
-
-        
+  
     - name: install docker compose
       apt:
         name: 
           - docker-compose-plugin
         state: present
         update_cache: yes
+
+    - name: Create a virtual environment
+      command: python3 -m venv /opt/myenv
+
+    - name: Install Docker SDK for Python in virtual environment
+      command: /opt/myenv/bin/pip install docker
+      args:
+        creates: /opt/myenv/lib/python3.12/site-packages/docker
+
+    - name: Set Python interpreter for Ansible
+      set_fact:
+        ansible_python_interpreter: /opt/myenv/bin/python
 
     - name: ensure Docker service is started
       service:

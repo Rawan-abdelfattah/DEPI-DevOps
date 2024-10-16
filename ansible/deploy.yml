@@ -1,34 +1,44 @@
 ---
 - name: Deploy Docker Images
-  hosts: frontend
+  become: yes
+  vars:
+    ansible_ssh_common_args: >-
+      -o ProxyCommand="ssh -o StrictHostKeyChecking=no -W %h:%p -i ~/.ssh/mykey ubuntu@{{ hostvars['frontend-server'].ansible_host }}"
+    ansible_user: ubuntu
+  hosts: frontend-server
   tasks:
     - name: Pull frontend image
       docker_image:
-        name: website-frontend
+        name: devops_frontend
         source: local
         tag: latest
 
     - name: Run frontend container
       docker_container:
         name: react-frontend
-        image: website-frontend:latest
+        image: devops_frontend:latest
         ports:
           - "3000:80"
         restart_policy: always
 
 - name: Deploy Docker Images
-  hosts: backend
+  become: yes
+  vars:
+    ansible_ssh_common_args: >-
+      -o ProxyCommand="ssh -o StrictHostKeyChecking=no -W %h:%p -i ~/.ssh/mykey ubuntu@{{ hostvars['frontend-server'].ansible_host }}"
+    ansible_user: ubuntu
+  hosts: backend-server
   tasks:
     - name: Pull backend image
       docker_image:
-        name: website-backend
+        name: devops_backend
         source: local
         tag: latest
 
     - name: Run backend container
       docker_container:
         name: node-backend
-        image: website-backend:latest
+        image: devops_backend:latest
         ports:
           - "5000:5000"
         environment:
@@ -36,7 +46,12 @@
         restart_policy: always
 
 - name: Deploy Docker Images
-  hosts: database
+  become: yes
+  vars:
+    ansible_ssh_common_args: >-
+      -o ProxyCommand="ssh -o StrictHostKeyChecking=no -W %h:%p -i ~/.ssh/mykey ubuntu@{{ hostvars['frontend-server'].ansible_host }}"
+    ansible_user: ubuntu
+  hosts: db-server
   tasks:
     - name: Pull MongoDB image
       docker_image:
