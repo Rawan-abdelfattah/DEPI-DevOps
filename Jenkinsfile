@@ -8,6 +8,7 @@ pipeline {
         TERRAFORM_DIR = 'terraform/'  // Directory containing your Terraform configuration
         AWS_ACCESS_KEY_ID = credentials('aws-credentials') // Reference your Jenkins credential ID
         AWS_SECRET_ACCESS_KEY = credentials('aws-credentials') 
+        AWS_REGION = 'eu-north-1'
     }
 
     stages {
