@@ -87,14 +87,14 @@ pipeline {
             steps {
                 // Push the frontend image to Docker Hub
                 withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh 'docker tag your_frontend_image_name:latest $DOCKER_USERNAME/devops_frontend:latest'
+                    sh 'docker tag website-frontend:latest $DOCKER_USERNAME/devops_frontend:latest'
                     sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
                     sh 'docker push $DOCKER_USERNAME/devops_frontend:latest'
                 }
                 
                 // Push the backend image to Docker Hub
                 withCredentials([usernamePassword(credentialsId: DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                    sh 'docker tag your_backend_image_name:latest $DOCKER_USERNAME/devops_backend:latest'
+                    sh 'docker tag website-backend:latest $DOCKER_USERNAME/devops_backend:latest'
                     sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
                     sh 'docker push $DOCKER_USERNAME/devops_backend:latest'
                 }
