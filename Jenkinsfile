@@ -29,10 +29,8 @@ pipeline {
                 sh '''
                 cd terraform
                 ssh-keygen -f mykey
-                eval "$(ssh-agent -s)"
-                ssh-add mykey
-                cp mykey ~/.ssh
-                cp mykey.pub ~/.ssh
+                cp mykey ~/.ssh/
+                cp mykey.pub ~/.ssh/
                 cd ..
                 '''
             }
