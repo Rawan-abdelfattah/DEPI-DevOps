@@ -9,14 +9,14 @@
   tasks:
     - name: Pull frontend image
       docker_image:
-        name: devops_frontend
+        name: website-frontend
         source: local
         tag: latest
 
     - name: Run frontend container
       docker_container:
         name: react-frontend
-        image: devops_frontend:latest
+        image: website-frontend:latest
         ports:
           - "3000:80"
         restart_policy: always
@@ -31,14 +31,14 @@
   tasks:
     - name: Pull backend image
       docker_image:
-        name: devops_backend
+        name: website-backend
         source: local
         tag: latest
 
     - name: Run backend container
       docker_container:
         name: node-backend
-        image: devops_backend:latest
+        image: website-backend:latest
         ports:
           - "5000:5000"
         environment:
