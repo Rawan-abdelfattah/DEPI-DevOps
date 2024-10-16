@@ -14,12 +14,16 @@ pipeline {
             }
         }
 
-        // stage('Checkout') {
-        //     steps {
-        //         // Check out the code from the specified Git repository
-        //         git branch: 'main', credentialsId: 'Git', url: 'https://github.com/Rawan-abdelfattah/devops'
-        //     }
-        // }
+        stage('local docker setup')
+
+        stage('Checkout') {
+            steps {
+                // Check out the code from the specified Git repository
+                // git branch: 'main', credentialsId: 'Git', url: 'https://github.com/Rawan-abdelfattah/devops'
+                git branch: 'main', url: 'https://github.com/Rawan-abdelfattah/devops'
+
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
