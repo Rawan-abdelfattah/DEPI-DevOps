@@ -43,7 +43,7 @@ pipeline {
                     def terraformVersion = '1.5.3' // Change this to the desired version
 
                     sh """
-                        Remove existing Terraform if it's a directory or file
+                        # Remove existing Terraform if it's a directory or file
                         if [ -d /usr/local/bin/terraform ]; then
                             echo "Removing existing terraform directory"
                             sudo rm -rf /usr/local/bin/terraform
