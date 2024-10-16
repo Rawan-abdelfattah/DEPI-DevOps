@@ -1,0 +1,80 @@
+---
+- hosts: all
+  become: yes
+
+  vars:
+    ansible_ssh_common_args: >-
+      -o ProxyCommand="ssh -o StrictHostKeyChecking=no -W %h:%p -i ~/.ssh/mykey ubuntu@{{ hostvars['frontend-server'].ansible_host }}"
+    ansible_user: ubuntu
+  tasks:
+    - name: install required packages
+      apt:
+        name: 
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: present
+        update_cache: yes
+
+    # - name: add Docker GPG key
+    #   apt_key:
+    #     url: https://download.docker.com/linux/ubuntu/gpg
+    #     state: present
+    #     validate_certs: no
+    #   register: gpg_key
+
+    # - name: Change permissions for Docker keyring
+    #   command: chmod a+r /usr/share/keyrings/docker-archive-keyring.gpg
+    #   when: gpg_key.changed  # Only execute if the GPG key was added
+
+    # - name: add Docker repository
+    #   apt_repository:
+    #     repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    #     state: present
+
+    # - name: update apt and install Docker CE
+    #   apt:
+    #     name: docker-ce
+    #     state: latest
+    #     update_cache: yes
+    - name: Install Docker using convenience script
+      shell: |
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        sh get-docker.sh
+      args:
+        executable: /bin/bash
+
+        
+    - name: install docker compose
+      apt:
+        name: 
+          - docker-compose-plugin
+        state: present
+        update_cache: yes
+
+    - name: ensure Docker service is started
+      service:
+        name: docker
+        state: started
+        enabled: yes
+        
+    - name: add user to the docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+
+    - name: Add user to the sudo group (if not already a member)
+      user:
+        name: "{{ ansible_user }}"
+        groups: sudo
+        append: yes
+
+    - name: Get docker version for verification
+      shell: docker --version
+      register: docker_version
+
+    - name: Display docker version
+      debug:
+        msg: "Docker version: {{ docker_version.stdout }}"
