@@ -4,14 +4,14 @@
   tasks:
     - name: Pull frontend image
       docker_image:
-        name: frontend
+        name: website-frontend
         source: local
         tag: latest
 
     - name: Run frontend container
       docker_container:
         name: react-frontend
-        image: frontend:latest
+        image: website-frontend:latest
         ports:
           - "3000:80"
         restart_policy: always
