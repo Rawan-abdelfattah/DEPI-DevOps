@@ -6,6 +6,8 @@ pipeline {
         DOCKER_IMAGE_NAME = 'web_app' // Name for the Docker image
         ANSIBLE_PLAYBOOK = 'deploy.yml' // Ansible playbook (not used in the build stage)
         TERRAFORM_DIR = 'terraform/'  // Directory containing your Terraform configuration
+        AWS_ACCESS_KEY_ID = credentials('aws-credentials') // Reference your Jenkins credential ID
+        AWS_SECRET_ACCESS_KEY = credentials('aws-credentials') 
     }
 
     stages {
