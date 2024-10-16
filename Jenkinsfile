@@ -38,13 +38,18 @@ pipeline {
 
         stage('Install Terraform') {
             steps {
-                sh '''
-                    if [ ! -f /usr/local/bin/terraform ]; then
-                        wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-                        unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
-                        sudo mv terraform /usr/local/bin/
-                    fi
-                '''
+                script {
+                    // Make sure the Terraform version is set
+                    def terraformVersion = '1.5.3' // Change this to the desired version
+
+                    sh """
+                        if [ ! -f /usr/local/bin/terraform ]; then
+                            wget https://releases.hashicorp.com/terraform/${terraformVersion}/terraform_${terraformVersion}_linux_amd64.zip
+                            unzip terraform_${terraformVersion}_linux_amd64.zip
+                            sudo mv terraform /usr/local/bin/
+                        fi
+                    """
+                }
             }
         }
 
