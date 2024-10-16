@@ -1,0 +1,53 @@
+---
+- name: Deploy Docker Images
+  hosts: frontend
+  tasks:
+    - name: Pull frontend image
+      docker_image:
+        name: frontend
+        source: local
+        tag: latest
+
+    - name: Run frontend container
+      docker_container:
+        name: react-frontend
+        image: frontend:latest
+        ports:
+          - "3000:80"
+        restart_policy: always
+
+- name: Deploy Docker Images
+  hosts: backend
+  tasks:
+    - name: Pull backend image
+      docker_image:
+        name: backend
+        source: local
+        tag: latest
+
+    - name: Run backend container
+      docker_container:
+        name: node-backend
+        image: backend:latest
+        ports:
+          - "5000:5000"
+        environment:
+          MONGO_URI: mongodb://mongo:27017/mydatabase
+        restart_policy: always
+
+- name: Deploy Docker Images
+  hosts: database
+  tasks:
+    - name: Pull MongoDB image
+      docker_image:
+        name: mongo
+        source: local
+        tag: latest
+
+    - name: Run MongoDB container
+      docker_container:
+        name: mongodb
+        image: mongo:latest
+        ports:
+          - "27017:27017"
+        restart_policy: always

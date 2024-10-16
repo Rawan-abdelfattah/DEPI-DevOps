@@ -27,58 +27,58 @@ pipeline {
             }
         }
 
-        stage('key generation'){
-            steps{
-                sh '''
-                cd terraform
-                ssh-keygen -f mykey
-                cp mykey ~/.ssh/
-                cp mykey.pub ~/.ssh/
-                cd ..
-                '''
-            }
-        }
+        // stage('key generation'){
+        //     steps{
+        //         sh '''
+        //         cd terraform
+        //         ssh-keygen -f mykey
+        //         cp mykey ~/.ssh/
+        //         cp mykey.pub ~/.ssh/
+        //         cd ..
+        //         '''
+        //     }
+        // }
 
 
-        stage('Terraform Init') {
-            steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
-                    dir(TERRAFORM_DIR) {
-                        sh 'terraform init'
-                    }
-                }
-            }
-        }
-
-        // stage('Terraform Plan') {
+        // stage('Terraform Init') {
         //     steps {
         //         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
         //             dir(TERRAFORM_DIR) {
-        //                 sh 'terraform plan -out=tfplan'
+        //                 sh 'terraform init'
         //             }
         //         }
         //     }
         // }
 
-        stage('Terraform Apply') {
-            steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
-                    dir(TERRAFORM_DIR) {
-                        sh 'terraform apply --auto-approve'
-                    }
-                }
-            }
-        }
+        // // stage('Terraform Plan') {
+        // //     steps {
+        // //         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+        // //             dir(TERRAFORM_DIR) {
+        // //                 sh 'terraform plan -out=tfplan'
+        // //             }
+        // //         }
+        // //     }
+        // // }
 
-        stage('Terraform Destroy') {
-            steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
-                    dir(TERRAFORM_DIR) {
-                        sh 'terraform destroy --auto-approve'
-                    }
-                }
-            }
-        }
+        // stage('Terraform Apply') {
+        //     steps {
+        //         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+        //             dir(TERRAFORM_DIR) {
+        //                 sh 'terraform apply --auto-approve'
+        //             }
+        //         }
+        //     }
+        // }
+
+        // stage('Terraform Destroy') {
+        //     steps {
+        //         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+        //             dir(TERRAFORM_DIR) {
+        //                 sh 'terraform destroy --auto-approve'
+        //             }
+        //         }
+        //     }
+        // }
 
 
         stage('Build Docker Image') {
@@ -90,6 +90,18 @@ pipeline {
                     
                     // Build the Docker image using Docker Compose
                     sh 'docker-compose build' // Include --verbose for more detailed output
+                }
+            }
+        }
+
+        stage('Deploy with Ansible') {
+            steps {
+                script {
+                    sh '''
+                    cd ansible
+                    ansible-playbook -i inventory.aws_ec2.yml docker-setup.yml
+                    ansible-playbook -i inventory.aws_ec2.yml deploy.yml
+                    '''
                 }
             }
         }
