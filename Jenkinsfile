@@ -4,11 +4,10 @@ pipeline {
     environment {
         DOCKER_CREDENTIALS_ID = 'dockerhub' // Your Docker Hub credentials ID
         DOCKER_IMAGE_NAME = 'web_app' // Name for the Docker image
-        ANSIBLE_PLAYBOOK = 'deploy.yml' // Ansible playbook (not used in the build stage)
-        TERRAFORM_DIR = 'terraform/'  // Directory containing your Terraform configuration
-        AWS_ACCESS_KEY_ID = credentials('aws-credentials') // Reference your Jenkins credential ID
-        AWS_SECRET_ACCESS_KEY = credentials('aws-credentials') 
-        AWS_REGION = 'eu-north-1'
+        // TERRAFORM_DIR = 'terraform/'  // Directory containing your Terraform configuration
+        // AWS_ACCESS_KEY_ID = credentials('aws-credentials') // Reference your Jenkins credential ID
+        // AWS_SECRET_ACCESS_KEY = credentials('aws-credentials') 
+        // AWS_REGION = 'eu-north-1'
     }
 
     stages {
@@ -99,6 +98,8 @@ pipeline {
                 script {
                     sh '''
                     cd ansible
+                    sudo u+x env-script.sh
+                    ./env-script.sh
                     ansible-playbook -i inventory.aws_ec2.yml docker-setup.yml
                     ansible-playbook -i inventory.aws_ec2.yml deploy.yml
                     '''
