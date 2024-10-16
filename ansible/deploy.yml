@@ -9,14 +9,14 @@
   tasks:
     - name: Pull frontend image
       docker_image:
-        name: website-frontend
-        source: local
+        name: janaessam/devops_frontend
+        source: pull
         tag: latest
 
     - name: Run frontend container
       docker_container:
         name: react-frontend
-        image: website-frontend:latest
+        image: janaessam/devops_frontend:latest
         ports:
           - "3000:80"
         restart_policy: always
@@ -31,17 +31,17 @@
   tasks:
     - name: Pull backend image
       docker_image:
-        name: website-backend
-        source: local
+        name: janaessam/devops_backend
+        source: pull
         tag: latest
 
     - name: Run backend container
       docker_container:
         name: node-backend
-        image: website-backend:latest
+        image: janaessam/devops_backend:latest
         ports:
           - "5000:5000"
-        environment:
+        env:
           MONGO_URI: mongodb://mongo:27017/mydatabase
         restart_policy: always
 
@@ -56,7 +56,7 @@
     - name: Pull MongoDB image
       docker_image:
         name: mongo
-        source: local
+        source: pull
         tag: latest
 
     - name: Run MongoDB container
