@@ -57,6 +57,12 @@ resource "aws_security_group" "frontend_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  ingress {
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 resource "aws_security_group" "bastion-allow-ssh" {
   vpc_id      = var.vpc_id
