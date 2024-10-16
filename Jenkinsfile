@@ -49,21 +49,31 @@ pipeline {
             }
         }
 
-        stage('Terraform Plan') {
-            steps {
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
-                    dir(TERRAFORM_DIR) {
-                        sh 'terraform plan -out=tfplan'
-                    }
-                }
-            }
-        }
+        // stage('Terraform Plan') {
+        //     steps {
+        //         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+        //             dir(TERRAFORM_DIR) {
+        //                 sh 'terraform plan -out=tfplan'
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Terraform Apply') {
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
                     dir(TERRAFORM_DIR) {
-                        sh 'terraform apply -input=false tfplan'
+                        sh 'terraform apply --auto-approve'
+                    }
+                }
+            }
+        }
+
+        stage('Terraform Destroy') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+                    dir(TERRAFORM_DIR) {
+                        sh 'terraform destroy --auto-approve'
                     }
                 }
             }
