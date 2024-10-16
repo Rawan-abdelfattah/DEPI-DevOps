@@ -45,7 +45,7 @@ pipeline {
                     sh """
                         if [ ! -f /usr/local/bin/terraform ]; then
                             wget https://releases.hashicorp.com/terraform/${terraformVersion}/terraform_${terraformVersion}_linux_amd64.zip
-                            unzip terraform_${terraformVersion}_linux_amd64.zip
+                            unzip -o terraform_${terraformVersion}_linux_amd64.zip
                             sudo mv terraform /usr/local/bin/
                         fi
                     """
