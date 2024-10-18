@@ -39,16 +39,10 @@
 
     - name: Stage changes for Git
       command: git add ../client/src/config/api.js ../server/.env ../terraform_outputs.json
-      # args:
-      #   chdir: ../  # Change to the directory where your Git repository is
 
     - name: Commit changes
       command: git commit -m "Update API and DB IPs in configuration files"
-      # args:
-      #   chdir: ../  # Change to the directory where your Git repository is
 
     - name: Push changes to GitHub
       command: git push origin main
-      # args:
-      #   chdir: ../
 
