@@ -43,7 +43,7 @@ Ensure the following dependencies are installed on your local environment:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/yourusername/your-repo.git
+    git clone https://github.com/Rawan-abdelfattah/devops.git
     cd your-repo
     ```
 
