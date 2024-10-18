@@ -1,0 +1,56 @@
+---
+- name: Set and Update Variables
+  hosts: localhost
+  tasks:
+    - name: Load Terraform output
+      command: cat ../terraform_outputs.json
+      register: terraform_outputs
+      delegate_to: localhost
+      become: false
+
+    - name: Set backend and DB private IPs
+      set_fact:
+        backend_server_private_ip: "{{ terraform_outputs.stdout | from_json | json_query('backend_server_private_ip.value') }}"
+        db_server_private_ip: "{{ terraform_outputs.stdout | from_json | json_query('db_server_private_ip.value') }}"
+
+    - name: Print the backend and database IPs
+      debug:
+        msg:
+          - "Backend Private IP: {{ backend_server_private_ip }}"
+          - "Database Private IP: {{ db_server_private_ip }}"
+
+    # - name: Save backend and DB private IPs to a file
+    #   copy:
+    #     content: |
+    #       backend_private_ip={{ backend_private_ip }}
+    #       db_private_ip={{ db_private_ip }}
+    #     dest: ../vars/ips_variables.env
+    #     mode: '0644'
+
+    # - name: Check if the variables file was created
+    #   stat:
+    #     path: ../vars/ips_variables.env
+    #   register: vars_file
+
+    # - name: Fail if the variables file was not created
+    #   fail:
+    #     msg: "The variables file was not created!"
+    #   when: not vars_file.stat.exists
+
+    - name: Update api.js with backend IP
+      lineinfile:
+        path: ../client/src/config/api.js
+        regexp: '  baseURL: "http://.*:5000/api,"'
+        line: '  baseURL: "http://{{ backend_server_private_ip }}:5000/api,"'
+    - name: Update api.js with backend IP
+      lineinfile:
+        path: ../client/src/config/api.js
+        regexp: 'export const apiUrl = "http://.*:5000/api"'
+        line: 'export const apiUrl = "http://{{ backend_server_private_ip }}:5000/api"'
+
+    - name: Update .env with database IP
+      lineinfile:
+        path: ../server/.env
+        regexp: 'DB_URL=.*'
+        line: 'DB_URL=mongodb://{{ db_server_private_ip }}:27017/walid-library'
+
