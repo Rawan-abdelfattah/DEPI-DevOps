@@ -71,4 +71,5 @@
 
     - name: Display docker version
       debug:
-        msg: "Docker version: {{ docker_version.stdout }}"
+        msg: "Docker version: {{ docker_version.stdout }}" 
+           

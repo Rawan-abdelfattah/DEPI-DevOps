@@ -1,5 +1,5 @@
 ---
-- name: Set and Update Variables
+- name: Set and Update Private Ip's within website
   hosts: localhost
   tasks:
     - name: Load Terraform output
@@ -19,29 +19,12 @@
           - "Backend Private IP: {{ backend_server_private_ip }}"
           - "Database Private IP: {{ db_server_private_ip }}"
 
-    # - name: Save backend and DB private IPs to a file
-    #   copy:
-    #     content: |
-    #       backend_private_ip={{ backend_private_ip }}
-    #       db_private_ip={{ db_private_ip }}
-    #     dest: ../vars/ips_variables.env
-    #     mode: '0644'
-
-    # - name: Check if the variables file was created
-    #   stat:
-    #     path: ../vars/ips_variables.env
-    #   register: vars_file
-
-    # - name: Fail if the variables file was not created
-    #   fail:
-    #     msg: "The variables file was not created!"
-    #   when: not vars_file.stat.exists
-
     - name: Update api.js with backend IP
       lineinfile:
         path: ../client/src/config/api.js
-        regexp: '  baseURL: "http://.*:5000/api,"'
-        line: '  baseURL: "http://{{ backend_server_private_ip }}:5000/api,"'
+        regexp: '  baseURL: "http://.*:5000/api",'
+        line: '  baseURL: "http://{{ backend_server_private_ip }}:5000/api",'
+
     - name: Update api.js with backend IP
       lineinfile:
         path: ../client/src/config/api.js
@@ -53,4 +36,19 @@
         path: ../server/.env
         regexp: 'DB_URL=.*'
         line: 'DB_URL=mongodb://{{ db_server_private_ip }}:27017/walid-library'
+
+    - name: Stage changes for Git
+      command: git add ../client/src/config/api.js ../server/.env ../terraform_outputs.json
+      # args:
+      #   chdir: ../  # Change to the directory where your Git repository is
+
+    - name: Commit changes
+      command: git commit -m "Update API and DB IPs in configuration files"
+      # args:
+      #   chdir: ../  # Change to the directory where your Git repository is
+
+    - name: Push changes to GitHub
+      command: git push origin main
+      # args:
+      #   chdir: ../
 
