@@ -27,3 +27,4 @@ export const handleApiError = (error) => {
 
 export const apiUrl = "http://10.0.1.12:5000/api"
 export default Api
+  baseURL: "http://10.0.1.12:5000/api",
