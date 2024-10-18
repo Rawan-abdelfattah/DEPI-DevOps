@@ -2,7 +2,7 @@ import axios from "axios";
 import { notifyError } from "../utilities/toastify";
 
 const Api = axios.create({
-  baseURL: "http://10.0.1.12:5000/api"
+  baseURL: "http://10.0.1.12:5000/api",
   headers: {
     'Content-Type': 'application/json',
   },
