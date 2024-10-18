@@ -2,7 +2,7 @@
   "backend_server_private_ip": {
     "sensitive": false,
     "type": "string",
-    "value": "10.0.1.12"
+    "value": "10.0.1.46"
   },
   "backend_server_public_ip": {
     "sensitive": false,
@@ -12,7 +12,7 @@
   "db_server_private_ip": {
     "sensitive": false,
     "type": "string",
-    "value": "10.0.1.96"
+    "value": "10.0.1.87"
   },
   "db_server_public_ip": {
     "sensitive": false,
@@ -22,11 +22,11 @@
   "frontend_server_private_ip": {
     "sensitive": false,
     "type": "string",
-    "value": "10.0.101.26"
+    "value": "10.0.101.224"
   },
   "frontend_server_public_ip": {
     "sensitive": false,
     "type": "string",
-    "value": "51.20.125.96"
+    "value": "51.20.98.166"
   }
 }
