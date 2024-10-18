@@ -25,49 +25,6 @@ pipeline {
             }
         }
 
-        // stage('key generation'){
-        //     steps{
-        //         sh '''
-        //         cd terraform
-        //         ssh-keygen -f mykey
-        //         cp mykey ~/.ssh/
-        //         cp mykey.pub ~/.ssh/
-        //         cd ..
-        //         '''
-        //     }
-        // }
-
-
-        // stage('Terraform Init') {
-        //     steps {
-        //         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
-        //             dir(TERRAFORM_DIR) {
-        //                 sh 'terraform init'
-        //             }
-        //         }
-        //     }
-        // }
-
-        // // stage('Terraform Plan') {
-        // //     steps {
-        // //         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
-        // //             dir(TERRAFORM_DIR) {
-        // //                 sh 'terraform plan -out=tfplan'
-        // //             }
-        // //         }
-        // //     }
-        // // }
-
-        // stage('Terraform Apply') {
-        //     steps {
-        //         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
-        //             dir(TERRAFORM_DIR) {
-        //                 sh 'terraform apply --auto-approve'
-        //             }
-        //         }
-        //     }
-        // }
-
 
         stage('Build Docker Image') {
             steps {
@@ -100,6 +57,51 @@ pipeline {
             }
         }
 
+        post {
+        always {
+            // Logout from Docker after the build is complete to clean up
+            sh 'docker logout'
+        }
+    }
+
+        // uncomment for terraform+jenkins integration:
+
+        // stage('key generation'){
+        //     steps{
+        //         sh '''
+        //         cd terraform
+        //         ssh-keygen -f mykey
+        //         cp mykey ~/.ssh/
+        //         cp mykey.pub ~/.ssh/
+        //         cd ..
+        //         '''
+        //     }
+        // }
+
+        // stage('Terraform Init') {
+        //     steps {
+        //         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+        //             dir(TERRAFORM_DIR) {
+        //                 sh 'terraform init'
+        //             }
+        //         }
+        //     }
+        // }
+
+        // stage('Terraform Apply') {
+        //     steps {
+        //         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-credentials']]) {
+        //             dir(TERRAFORM_DIR) {
+        //                 sh 'terraform apply --auto-approve'
+        //             }
+        //         }
+        //     }
+        // }
+
+        // ---------------------------------------------
+
+        // uncomment for ansible+jenkins integration:
+
         // stage('Deploy with Ansible') {
         //     steps {
         //         script {
@@ -113,10 +115,4 @@ pipeline {
         // }
     }
 
-    post {
-        always {
-            // Logout from Docker after the build is complete to clean up
-            sh 'docker logout'
-        }
-    }
 }

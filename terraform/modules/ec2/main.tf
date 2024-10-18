@@ -107,17 +107,17 @@ resource "aws_security_group" "backend_sg" { // private security grp
 
   // for database access
   ingress {
-    from_port   = 27017
+    from_port   = 27017 //db
     to_port     = 27017
     protocol    = "tcp"
-    security_groups = ["${aws_security_group.frontend_sg.id}"]
+    security_groups = ["${aws_security_group.bastion-allow-ssh.id}"]
   }
 
   ingress {
-    from_port   = 5000
+    from_port   = 5000  //backend
     to_port     = 5000
     protocol    = "tcp"
-    security_groups = ["${aws_security_group.frontend_sg.id}"]
+    security_groups = ["${aws_security_group.bastion-allow-ssh.id}"]
 
   }
 
