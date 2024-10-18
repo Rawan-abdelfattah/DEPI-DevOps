@@ -2,7 +2,7 @@ import axios from "axios";
 import { notifyError } from "../utilities/toastify";
 
 const Api = axios.create({
-  baseURL: "http://10.0.1.46:5000/api",
+  baseURL: "http://10.0.1.11:5000/api",
   headers: {
     'Content-Type': 'application/json',
   },
@@ -25,5 +25,5 @@ export const handleApiError = (error) => {
 };
 
 
-export const apiUrl = "http://10.0.1.46:5000/api"
+export const apiUrl = "http://10.0.1.11:5000/api"
 export default Api
