@@ -43,8 +43,8 @@ Ensure the following dependencies are installed on your local environment:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/Rawan-abdelfattah/devops.git
-    cd devops
+    git clone https://github.com/Rawan-abdelfattah/DEPI-DevOps.git
+    cd DEPI-DevOps
     ```
 
 2. **Run the `quick-run.sh` script**:
