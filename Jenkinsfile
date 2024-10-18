@@ -101,17 +101,17 @@ pipeline {
             }
         }
 
-        stage('Deploy with Ansible') {
-            steps {
-                script {
-                    sh '''
-                    cd ansible
-                    ansible-playbook -i inventory.aws_ec2.yml docker-setup.yml
-                    ansible-playbook -i inventory.aws_ec2.yml deploy.yml
-                    '''
-                }
-            }
-        }
+        // stage('Deploy with Ansible') {
+        //     steps {
+        //         script {
+        //             sh '''
+        //             cd ansible
+        //             ansible-playbook -i inventory.aws_ec2.yml docker-setup.yml
+        //             ansible-playbook -i inventory.aws_ec2.yml deploy.yml
+        //             '''
+        //         }
+        //     }
+        // }
     }
 
     post {
